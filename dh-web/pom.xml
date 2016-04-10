@@ -8,7 +8,7 @@
   <artifactId>dh-web</artifactId>
   <packaging>war</packaging>
   
-   <dependencies>
+  <dependencies>
  	 <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -18,6 +18,20 @@
   		<groupId>com.dh</groupId>
   		<artifactId>dh-service</artifactId>
   		<version>${project.version}</version>
+  		<exclusions>
+  			<exclusion>
+  				<artifactId>easypoi-base</artifactId>
+  				<groupId>org.jeecg</groupId>
+  			</exclusion>
+  			<exclusion>
+  				<artifactId>easypoi-web</artifactId>
+  				<groupId>org.jeecg</groupId>
+  			</exclusion>
+  			<exclusion>
+  				<artifactId>easypoi-annotation</artifactId>
+  				<groupId>org.jeecg</groupId>
+  			</exclusion>
+  		</exclusions>
   	</dependency>
   	<dependency>
 		<groupId>com.mchange</groupId>
@@ -59,4 +73,5 @@
 		<artifactId>commons-fileupload</artifactId>
 	</dependency>
   </dependencies>
+  
 </project>
