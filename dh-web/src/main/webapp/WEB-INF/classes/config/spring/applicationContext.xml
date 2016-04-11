@@ -20,8 +20,8 @@
 	<context:annotation-config />
 	
 	<!-- 公共上下文环境，排除MVC的Controller -->
-	<context:component-scan base-package="com.youpo">
-		<context:exclude-filter expression="org.springframework.stereotype.Controller"    type="annotation" /> 
+	<context:component-scan base-package="com.dh">
+		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation" /> 
  	</context:component-scan>
  
 	<!-- 引入配置文件 -->
