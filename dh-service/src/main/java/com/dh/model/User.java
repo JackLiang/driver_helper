@@ -18,13 +18,15 @@ public class User {
 
     private String phone;
 
-    private String email;
-
     private Integer sex;
 
     private BigDecimal balance;
 
     private Integer platform;
+
+    private Date birthDay;
+
+    private Date licenseTime;
 
     private Date createTime;
 
@@ -90,14 +92,6 @@ public class User {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
     public Integer getSex() {
         return sex;
     }
@@ -120,6 +114,22 @@ public class User {
 
     public void setPlatform(Integer platform) {
         this.platform = platform;
+    }
+
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public Date getLicenseTime() {
+        return licenseTime;
+    }
+
+    public void setLicenseTime(Date licenseTime) {
+        this.licenseTime = licenseTime;
     }
 
     public Date getCreateTime() {

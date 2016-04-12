@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dh.dao.mapper.device.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.dh.model.user.User" >
+<mapper namespace="com.dh.dao.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.dh.model.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="account" property="account" jdbcType="VARCHAR" />
@@ -9,18 +9,19 @@
     <result column="open_id" property="openId" jdbcType="VARCHAR" />
     <result column="head_img" property="headImg" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="INTEGER" />
     <result column="balance" property="balance" jdbcType="DECIMAL" />
     <result column="platform" property="platform" jdbcType="INTEGER" />
+    <result column="birth_day" property="birthDay" jdbcType="TIMESTAMP" />
+    <result column="license_time" property="licenseTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="ext1" property="ext1" jdbcType="VARCHAR" />
     <result column="ext2" property="ext2" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, account, password, open_id, head_img, phone, email, sex, balance, platform, 
-    create_time, update_time, ext1, ext2
+    id, user_id, account, password, open_id, head_img, phone, sex, balance, platform, 
+    birth_day, license_time, create_time, update_time, ext1, ext2
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,21 +33,21 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.dh.model.user.User" >
+  <insert id="insert" parameterType="com.dh.model.User" >
     insert into user (id, user_id, account, 
       password, open_id, head_img, 
-      phone, email, sex, 
-      balance, platform, create_time, 
-      update_time, ext1, ext2
-      )
+      phone, sex, balance, 
+      platform, birth_day, license_time, 
+      create_time, update_time, ext1, 
+      ext2)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
-      #{balance,jdbcType=DECIMAL}, #{platform,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=INTEGER}
-      )
+      #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, 
+      #{platform,jdbcType=INTEGER}, #{birthDay,jdbcType=TIMESTAMP}, #{licenseTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{ext1,jdbcType=VARCHAR}, 
+      #{ext2,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.dh.model.user.User" >
+  <insert id="insertSelective" parameterType="com.dh.model.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -70,9 +71,6 @@
       <if test="phone != null" >
         phone,
       </if>
-      <if test="email != null" >
-        email,
-      </if>
       <if test="sex != null" >
         sex,
       </if>
@@ -81,6 +79,12 @@
       </if>
       <if test="platform != null" >
         platform,
+      </if>
+      <if test="birthDay != null" >
+        birth_day,
+      </if>
+      <if test="licenseTime != null" >
+        license_time,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -117,9 +121,6 @@
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
       <if test="sex != null" >
         #{sex,jdbcType=INTEGER},
       </if>
@@ -128,6 +129,12 @@
       </if>
       <if test="platform != null" >
         #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="birthDay != null" >
+        #{birthDay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="licenseTime != null" >
+        #{licenseTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -143,7 +150,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dh.model.user.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dh.model.User" >
     update user
     <set >
       <if test="userId != null" >
@@ -164,9 +171,6 @@
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
       <if test="sex != null" >
         sex = #{sex,jdbcType=INTEGER},
       </if>
@@ -175,6 +179,12 @@
       </if>
       <if test="platform != null" >
         platform = #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="birthDay != null" >
+        birth_day = #{birthDay,jdbcType=TIMESTAMP},
+      </if>
+      <if test="licenseTime != null" >
+        license_time = #{licenseTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -191,7 +201,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dh.model.user.User" >
+  <update id="updateByPrimaryKey" parameterType="com.dh.model.User" >
     update user
     set user_id = #{userId,jdbcType=VARCHAR},
       account = #{account,jdbcType=VARCHAR},
@@ -199,14 +209,29 @@
       open_id = #{openId,jdbcType=VARCHAR},
       head_img = #{headImg,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
       sex = #{sex,jdbcType=INTEGER},
       balance = #{balance,jdbcType=DECIMAL},
       platform = #{platform,jdbcType=INTEGER},
+      birth_day = #{birthDay,jdbcType=TIMESTAMP},
+      license_time = #{licenseTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       ext1 = #{ext1,jdbcType=VARCHAR},
       ext2 = #{ext2,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+    <select id="selectByAccountAndPassword" resultMap="BaseResultMap" parameterType="map">
+   select 
+    <include refid="Base_Column_List" />
+    from user
+    where account = #{account,jdbcType=VARCHAR} and password = PASSWORD(#{password,jdbcType=VARCHAR})
+  </select>
+  
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.dh.dao.mapper;
 
+import java.util.Map;
+
 import com.dh.model.User;
 
 public interface UserMapper {
@@ -14,4 +16,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    User selectByAccountAndPassword(Map<String,Object> map);
+    
+    User selectByUserId(String userId);
 }
