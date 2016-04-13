@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dh.dao.mapper.device.MessageMapper" >
-  <resultMap id="BaseResultMap" type="com.dh.model.user.Message" >
+  <resultMap id="BaseResultMap" type="com.dh.model.Message" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
@@ -29,7 +29,7 @@
     delete from message
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.dh.model.user.Message" >
+  <insert id="insert" parameterType="com.dh.model.Message" >
     insert into message (id, user_id, title, 
       type, desc, imgs, location, 
       address, create_time, update_time, 
@@ -39,7 +39,7 @@
       #{address,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.dh.model.user.Message" >
+  <insert id="insertSelective" parameterType="com.dh.model.Message" >
     insert into message
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -118,7 +118,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dh.model.user.Message" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dh.model.Message" >
     update message
     <set >
       <if test="userId != null" >
@@ -157,7 +157,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dh.model.user.Message" >
+  <update id="updateByPrimaryKey" parameterType="com.dh.model.Message" >
     update message
     set user_id = #{userId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
