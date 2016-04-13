@@ -35,4 +35,14 @@ public class UserServiceImpl implements UserService {
 		return userDao.update(user) > 0 ? true : false;
 	}
 
+	@Override
+	public boolean registOther(User user) {
+		return false;
+	}
+
+	@Override
+	public User getByOpenId(String openId) {
+		return userDao.getByOpenId(openId);
+	}
+
 }

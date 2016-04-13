@@ -20,4 +20,6 @@ public interface UserMapper {
     User selectByAccountAndPassword(Map<String,Object> map);
     
     User selectByUserId(String userId);
+    
+    User selectByOpenId(String openId);
 }

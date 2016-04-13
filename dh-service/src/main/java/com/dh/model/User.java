@@ -12,6 +12,8 @@ public class User {
 
     private String password;
 
+    private String nickname;
+    
     private String openId;
 
     private String headImg;
@@ -163,4 +165,13 @@ public class User {
     public void setExt2(Integer ext2) {
         this.ext2 = ext2;
     }
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+    
 }

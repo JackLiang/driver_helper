@@ -6,6 +6,7 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="open_id" property="openId" jdbcType="VARCHAR" />
     <result column="head_img" property="headImg" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
@@ -20,7 +21,7 @@
     <result column="ext2" property="ext2" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, account, password, open_id, head_img, phone, sex, balance, platform, 
+    id, user_id, account, password, nickname, open_id, head_img, phone, sex, balance, platform, 
     birth_day, license_time, create_time, update_time, ext1, ext2
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -35,13 +36,13 @@
   </delete>
   <insert id="insert" parameterType="com.dh.model.User" >
     insert into user (id, user_id, account, 
-      password, open_id, head_img, 
+      password, nickname, open_id, head_img, 
       phone, sex, balance, 
       platform, birth_day, license_time, 
       create_time, update_time, ext1, 
       ext2)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, 
+      PASSWORD(#{password,jdbcType=VARCHAR}), #{nickname,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{balance,jdbcType=DECIMAL}, 
       #{platform,jdbcType=INTEGER}, #{birthDay,jdbcType=TIMESTAMP}, #{licenseTime,jdbcType=TIMESTAMP}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{ext1,jdbcType=VARCHAR}, 
@@ -61,6 +62,9 @@
       </if>
       <if test="password != null" >
         password,
+      </if>
+      <if test="nickname != null" >
+        nickname,
       </if>
       <if test="openId != null" >
         open_id,
@@ -110,7 +114,10 @@
         #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        #{password,jdbcType=VARCHAR},
+        PASSWORD(#{password,jdbcType=VARCHAR}),
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="openId != null" >
         #{openId,jdbcType=VARCHAR},
@@ -160,7 +167,10 @@
         account = #{account,jdbcType=VARCHAR},
       </if>
       <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
+        password = PASSWORD(#{password,jdbcType=VARCHAR}),
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
       </if>
       <if test="openId != null" >
         open_id = #{openId,jdbcType=VARCHAR},
@@ -205,7 +215,8 @@
     update user
     set user_id = #{userId,jdbcType=VARCHAR},
       account = #{account,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+      password = PASSWORD(#{password,jdbcType=VARCHAR}),
+      nickname = #{nickname,jdbcType=VARCHAR},
       open_id = #{openId,jdbcType=VARCHAR},
       head_img = #{headImg,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
@@ -233,5 +244,12 @@
     <include refid="Base_Column_List" />
     from user
     where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String">
+  select 
+    <include refid="Base_Column_List" />
+    from user
+    where open_id = #{openId,jdbcType=VARCHAR}
   </select>
 </mapper>

@@ -36,4 +36,9 @@ public class UserDaoImpl extends BaseDao implements UserDao{
 		return this.getMapper(UserMapper.class).selectByUserId(userId);
 	}
 
+	@Override
+	public User getByOpenId(String openId) {
+		return this.getMapper(UserMapper.class).selectByOpenId(openId);
+	}
+
 }

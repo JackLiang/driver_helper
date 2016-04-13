@@ -12,4 +12,6 @@ public interface UserDao {
 	public User get(String account,String password);
 	
 	public User get(String userId);
+	
+	public User getByOpenId(String openId);
 }
