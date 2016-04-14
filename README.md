@@ -28,7 +28,7 @@ DH接口概要
  RETURN：{"code":0,"msg":"success","object":""}
  
  </br>
-*1.2 手机注册
+* 1.2 手机注册
 
   URL:/user/regist.do
   
