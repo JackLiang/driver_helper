@@ -29,12 +29,25 @@ public class OSSParam {
 	 * 对应key：oss_bucket_name
 	 */
 	private String bucketName;
+	
+	/**
+	 *  对应key：oss_end_point
+	 */
+	private String endPoint;
 
 	public OSSParam(String accessId, String accessKey, String urlBase, String bucketName) {
 		this.accessId = accessId;
 		this.accessKey = accessKey;
 		this.urlBase = urlBase;
 		this.bucketName = bucketName;
+	}
+	
+	public OSSParam(String accessId, String accessKey, String urlBase, String bucketName,String endPoint) {
+		this.accessId = accessId;
+		this.accessKey = accessKey;
+		this.urlBase = urlBase;
+		this.bucketName = bucketName;
+		this.endPoint = endPoint;
 	}
 
 	public String getAccessId() {
@@ -69,7 +82,12 @@ public class OSSParam {
 		this.bucketName = bucketName;
 	}
 
-	
-	
+	public String getEndPoint() {
+		return endPoint;
+	}
+
+	public void setEndPoint(String endPoint) {
+		this.endPoint = endPoint;
+	}
 	
 }

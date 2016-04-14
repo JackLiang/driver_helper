@@ -49,7 +49,7 @@ public class OSSUtils {
 		File file = new File(localFileName);
 		InputStream input = null;
 		try {
-			OSSClient client = new OSSClient(ossParam.getUrlBase(), ossParam.getAccessId(), ossParam.getAccessKey());
+			OSSClient client = new OSSClient(ossParam.getEndPoint(), ossParam.getAccessId(), ossParam.getAccessKey());
 
 			ObjectMetadata objectMeta = new ObjectMetadata();
 			objectMeta.setContentLength(file.length());

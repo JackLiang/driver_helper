@@ -33,8 +33,7 @@ import org.slf4j.LoggerFactory;
  * @author ying_liu 2015年4月13日
  */
 public class ImageUtils {
-	private static Logger LOG = LoggerFactory
-			.getLogger(ImageUtils.class);
+	private static Logger LOG = LoggerFactory.getLogger(ImageUtils.class);
 
 	/**
 	 * 几种常见的图片格式
@@ -58,8 +57,7 @@ public class ImageUtils {
 	 * @param flag
 	 *            缩放选择:true 放大; false 缩小;
 	 */
-	public final static void scale(String srcImageFile, String result,
-			int scale, boolean flag) {
+	public final static void scale(String srcImageFile, String result, int scale, boolean flag) {
 		try {
 			BufferedImage src = ImageIO.read(new File(srcImageFile)); // 读入文件
 			int width = src.getWidth(); // 得到源图宽
@@ -71,10 +69,8 @@ public class ImageUtils {
 				width = width / scale;
 				height = height / scale;
 			}
-			Image image = src.getScaledInstance(width, height,
-					Image.SCALE_DEFAULT);
-			BufferedImage tag = new BufferedImage(width, height,
-					BufferedImage.TYPE_INT_RGB);
+			Image image = src.getScaledInstance(width, height, Image.SCALE_DEFAULT);
+			BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 			Graphics g = tag.getGraphics();
 			g.drawImage(image, 0, 0, null); // 绘制缩小后的图
 			g.dispose();
@@ -96,8 +92,7 @@ public class ImageUtils {
 	 * @param bb
 	 *            比例不对时是否需要补白：true为补白; false为不补白;
 	 */
-	public final static BufferedImage scale2(String srcImageFile, int height,
-			int width, boolean bb) {
+	public final static BufferedImage scale2(String srcImageFile, int height, int width, boolean bb) {
 		Image itemp = null;
 		try {
 			double ratio = 0.0; // 缩放比例
@@ -107,29 +102,22 @@ public class ImageUtils {
 			// 计算比例
 			if ((bi.getHeight() > height) || (bi.getWidth() > width)) {
 				if (bi.getHeight() > bi.getWidth()) {
-					ratio = (new Integer(height)).doubleValue()
-							/ bi.getHeight();
+					ratio = (new Integer(height)).doubleValue() / bi.getHeight();
 				} else {
 					ratio = (new Integer(width)).doubleValue() / bi.getWidth();
 				}
-				AffineTransformOp op = new AffineTransformOp(
-						AffineTransform.getScaleInstance(ratio, ratio), null);
+				AffineTransformOp op = new AffineTransformOp(AffineTransform.getScaleInstance(ratio, ratio), null);
 				itemp = op.filter(bi, null);
 			}
 			if (bb) {// 补白
-				BufferedImage image = new BufferedImage(width, height,
-						BufferedImage.TYPE_INT_RGB);
+				BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 				Graphics2D g = image.createGraphics();
 				g.setColor(Color.white);
 				g.fillRect(0, 0, width, height);
 				if (width == itemp.getWidth(null))
-					g.drawImage(itemp, 0, (height - itemp.getHeight(null)) / 2,
-							itemp.getWidth(null), itemp.getHeight(null),
-							Color.white, null);
+					g.drawImage(itemp, 0, (height - itemp.getHeight(null)) / 2, itemp.getWidth(null), itemp.getHeight(null), Color.white, null);
 				else
-					g.drawImage(itemp, (width - itemp.getWidth(null)) / 2, 0,
-							itemp.getWidth(null), itemp.getHeight(null),
-							Color.white, null);
+					g.drawImage(itemp, (width - itemp.getWidth(null)) / 2, 0, itemp.getWidth(null), itemp.getHeight(null), Color.white, null);
 				g.dispose();
 				itemp = image;
 			}
@@ -138,7 +126,7 @@ public class ImageUtils {
 		}
 		return (BufferedImage) itemp;
 	}
-	
+
 	/**
 	 * 缩放图像（按高度和宽度缩放）
 	 * 
@@ -151,8 +139,7 @@ public class ImageUtils {
 	 * @param bb
 	 *            比例不对时是否需要补白：true为补白; false为不补白;
 	 */
-	public final static BufferedImage scale2(BufferedImage srcImage, int height,
-			int width, boolean bb) {
+	public final static BufferedImage scale2(BufferedImage srcImage, int height, int width, boolean bb) {
 		Image itemp = null;
 		try {
 			double ratio = 0.0; // 缩放比例
@@ -160,29 +147,22 @@ public class ImageUtils {
 			// 计算比例
 			if ((srcImage.getHeight() > height) || (srcImage.getWidth() > width)) {
 				if (srcImage.getHeight() > srcImage.getWidth()) {
-					ratio = (new Integer(height)).doubleValue()
-							/ srcImage.getHeight();
+					ratio = (new Integer(height)).doubleValue() / srcImage.getHeight();
 				} else {
 					ratio = (new Integer(width)).doubleValue() / srcImage.getWidth();
 				}
-				AffineTransformOp op = new AffineTransformOp(
-						AffineTransform.getScaleInstance(ratio, ratio), null);
+				AffineTransformOp op = new AffineTransformOp(AffineTransform.getScaleInstance(ratio, ratio), null);
 				itemp = op.filter(srcImage, null);
 			}
 			if (bb) {// 补白
-				BufferedImage image = new BufferedImage(width, height,
-						BufferedImage.TYPE_INT_RGB);
+				BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 				Graphics2D g = image.createGraphics();
 				g.setColor(Color.white);
 				g.fillRect(0, 0, width, height);
 				if (width == itemp.getWidth(null))
-					g.drawImage(itemp, 0, (height - itemp.getHeight(null)) / 2,
-							itemp.getWidth(null), itemp.getHeight(null),
-							Color.white, null);
+					g.drawImage(itemp, 0, (height - itemp.getHeight(null)) / 2, itemp.getWidth(null), itemp.getHeight(null), Color.white, null);
 				else
-					g.drawImage(itemp, (width - itemp.getWidth(null)) / 2, 0,
-							itemp.getWidth(null), itemp.getHeight(null),
-							Color.white, null);
+					g.drawImage(itemp, (width - itemp.getWidth(null)) / 2, 0, itemp.getWidth(null), itemp.getHeight(null), Color.white, null);
 				g.dispose();
 				itemp = image;
 			}
@@ -206,8 +186,7 @@ public class ImageUtils {
 	 * @param bb
 	 *            比例不对时是否需要补白：true为补白; false为不补白;
 	 */
-	public final static void scale2(String srcImageFile, String destImageFile,
-			int height, int width, boolean bb) {
+	public final static void scale2(String srcImageFile, String destImageFile, int height, int width, boolean bb) {
 		try {
 			BufferedImage image = scale2(srcImageFile, height, width, bb);
 			ImageIO.write(image, "JPEG", new File(destImageFile));
@@ -232,24 +211,19 @@ public class ImageUtils {
 	 * @param height
 	 *            目标切片高度
 	 */
-	public final static void cut(String srcImageFile, String result, int x,
-			int y, int width, int height) {
+	public final static void cut(String srcImageFile, String result, int x, int y, int width, int height) {
 		try {
 			// 读取源图像
 			BufferedImage bi = ImageIO.read(new File(srcImageFile));
 			int srcWidth = bi.getHeight(); // 源图宽度
 			int srcHeight = bi.getWidth(); // 源图高度
 			if (srcWidth > 0 && srcHeight > 0) {
-				Image image = bi.getScaledInstance(srcWidth, srcHeight,
-						Image.SCALE_DEFAULT);
+				Image image = bi.getScaledInstance(srcWidth, srcHeight, Image.SCALE_DEFAULT);
 				// 四个参数分别为图像起点坐标和宽高
 				// 即: CropImageFilter(int x,int y,int width,int height)
-				ImageFilter cropFilter = new CropImageFilter(x, y, width,
-						height);
-				Image img = Toolkit.getDefaultToolkit().createImage(
-						new FilteredImageSource(image.getSource(), cropFilter));
-				BufferedImage tag = new BufferedImage(width, height,
-						BufferedImage.TYPE_INT_RGB);
+				ImageFilter cropFilter = new CropImageFilter(x, y, width, height);
+				Image img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(image.getSource(), cropFilter));
+				BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 				Graphics g = tag.getGraphics();
 				g.drawImage(img, 0, 0, width, height, null); // 绘制切割后的图
 				g.dispose();
@@ -273,8 +247,7 @@ public class ImageUtils {
 	 * @param cols
 	 *            目标切片列数。默认2，必须是范围 [1, 20] 之内
 	 */
-	public final static void cut2(String srcImageFile, String descDir,
-			int rows, int cols) {
+	public final static void cut2(String srcImageFile, String descDir, int rows, int cols) {
 		try {
 			if (rows <= 0 || rows > 20)
 				rows = 2; // 切片行数
@@ -287,8 +260,7 @@ public class ImageUtils {
 			if (srcWidth > 0 && srcHeight > 0) {
 				Image img;
 				ImageFilter cropFilter;
-				Image image = bi.getScaledInstance(srcWidth, srcHeight,
-						Image.SCALE_DEFAULT);
+				Image image = bi.getScaledInstance(srcWidth, srcHeight, Image.SCALE_DEFAULT);
 				int destWidth = srcWidth; // 每张切片的宽度
 				int destHeight = srcHeight; // 每张切片的高度
 				// 计算切片的宽度和高度
@@ -308,19 +280,14 @@ public class ImageUtils {
 					for (int j = 0; j < cols; j++) {
 						// 四个参数分别为图像起点坐标和宽高
 						// 即: CropImageFilter(int x,int y,int width,int height)
-						cropFilter = new CropImageFilter(j * destWidth, i
-								* destHeight, destWidth, destHeight);
-						img = Toolkit.getDefaultToolkit().createImage(
-								new FilteredImageSource(image.getSource(),
-										cropFilter));
-						BufferedImage tag = new BufferedImage(destWidth,
-								destHeight, BufferedImage.TYPE_INT_RGB);
+						cropFilter = new CropImageFilter(j * destWidth, i * destHeight, destWidth, destHeight);
+						img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(image.getSource(), cropFilter));
+						BufferedImage tag = new BufferedImage(destWidth, destHeight, BufferedImage.TYPE_INT_RGB);
 						Graphics g = tag.getGraphics();
 						g.drawImage(img, 0, 0, null); // 绘制缩小后的图
 						g.dispose();
 						// 输出为文件
-						ImageIO.write(tag, "JPEG", new File(descDir + "_r" + i
-								+ "_c" + j + ".jpg"));
+						ImageIO.write(tag, "JPEG", new File(descDir + "_r" + i + "_c" + j + ".jpg"));
 					}
 				}
 			}
@@ -341,8 +308,7 @@ public class ImageUtils {
 	 * @param destHeight
 	 *            目标切片高度。默认150
 	 */
-	public final static void cut3(String srcImageFile, String descDir,
-			int destWidth, int destHeight) {
+	public final static void cut3(String srcImageFile, String descDir, int destWidth, int destHeight) {
 		try {
 			if (destWidth <= 0)
 				destWidth = 200; // 切片宽度
@@ -355,8 +321,7 @@ public class ImageUtils {
 			if (srcWidth > destWidth && srcHeight > destHeight) {
 				Image img;
 				ImageFilter cropFilter;
-				Image image = bi.getScaledInstance(srcWidth, srcHeight,
-						Image.SCALE_DEFAULT);
+				Image image = bi.getScaledInstance(srcWidth, srcHeight, Image.SCALE_DEFAULT);
 				int cols = 0; // 切片横向数量
 				int rows = 0; // 切片纵向数量
 				// 计算切片的横向和纵向数量
@@ -376,19 +341,14 @@ public class ImageUtils {
 					for (int j = 0; j < cols; j++) {
 						// 四个参数分别为图像起点坐标和宽高
 						// 即: CropImageFilter(int x,int y,int width,int height)
-						cropFilter = new CropImageFilter(j * destWidth, i
-								* destHeight, destWidth, destHeight);
-						img = Toolkit.getDefaultToolkit().createImage(
-								new FilteredImageSource(image.getSource(),
-										cropFilter));
-						BufferedImage tag = new BufferedImage(destWidth,
-								destHeight, BufferedImage.TYPE_INT_RGB);
+						cropFilter = new CropImageFilter(j * destWidth, i * destHeight, destWidth, destHeight);
+						img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(image.getSource(), cropFilter));
+						BufferedImage tag = new BufferedImage(destWidth, destHeight, BufferedImage.TYPE_INT_RGB);
 						Graphics g = tag.getGraphics();
 						g.drawImage(img, 0, 0, null); // 绘制缩小后的图
 						g.dispose();
 						// 输出为文件
-						ImageIO.write(tag, "JPEG", new File(descDir + "_r" + i
-								+ "_c" + j + ".jpg"));
+						ImageIO.write(tag, "JPEG", new File(descDir + "_r" + i + "_c" + j + ".jpg"));
 					}
 				}
 			}
@@ -407,8 +367,7 @@ public class ImageUtils {
 	 * @param destImageFile
 	 *            目标图像地址
 	 */
-	public final static void convert(String srcImageFile, String formatName,
-			String destImageFile) {
+	public final static void convert(String srcImageFile, String formatName, String destImageFile) {
 		try {
 			File f = new File(srcImageFile);
 			f.canRead();
@@ -462,9 +421,8 @@ public class ImageUtils {
 	 * @param alpha
 	 *            透明度：alpha 必须是范围 [0.0, 1.0] 之内（包含边界值）的一个浮点数字
 	 */
-	public final static BufferedImage pressText(String pressText,
-			String srcImageFile, String fontName, int fontStyle, Color color,
-			int fontSize, int x, int y, float alpha) {
+	public final static BufferedImage pressText(String pressText, String srcImageFile, String fontName, int fontStyle, Color color, int fontSize,
+			int x, int y, float alpha) {
 		BufferedImage image = null;
 		try {
 			File img = new File(srcImageFile);
@@ -483,14 +441,14 @@ public class ImageUtils {
 			// g.drawString(pressText, (width - (getLength(pressText) *
 			// fontSize))
 			// / 2 + x, (height - fontSize) / 2 + y);
-			g.drawString(pressText, x, y);
+			g.drawString(pressText, width - x, height - y);
 			g.dispose();
 		} catch (Exception e) {
 			LOG.error("给图片添加文字水印失败。", e);
 		}
 		return image;
 	}
-	
+
 	/**
 	 * 给图片添加文字水印
 	 * 
@@ -513,9 +471,8 @@ public class ImageUtils {
 	 * @param alpha
 	 *            透明度：alpha 必须是范围 [0.0, 1.0] 之内（包含边界值）的一个浮点数字
 	 */
-	public final static BufferedImage pressText(String pressText,
-			BufferedImage src, String fontName, int fontStyle, Color color,
-			int fontSize, int x, int y, float alpha) {
+	public final static BufferedImage pressText(String pressText, BufferedImage src, String fontName, int fontStyle, Color color, int fontSize,
+			int x, int y, float alpha) {
 		BufferedImage image = null;
 		try {
 			int width = src.getWidth(null);
@@ -557,12 +514,10 @@ public class ImageUtils {
 	 * @param alpha
 	 *            透明度：alpha 必须是范围 [0.0, 1.0] 之内（包含边界值）的一个浮点数字
 	 */
-	public final static void savePressTextImg(String pressText,
-			String srcImageFile, String destImageFile, String fontName,
-			int fontStyle, Color color, int fontSize, int x, int y, float alpha) {
+	public final static void savePressTextImg(String pressText, String srcImageFile, String destImageFile, String fontName, int fontStyle,
+			Color color, int fontSize, int x, int y, float alpha) {
 		try {
-			BufferedImage image = pressText(pressText, srcImageFile, fontName,
-					fontStyle, color, fontSize, x, y, alpha);
+			BufferedImage image = pressText(pressText, srcImageFile, fontName, fontStyle, color, fontSize, x, y, alpha);
 
 			// 获取保存的图片扩展名
 			String imgType = getExtensionName(destImageFile);
@@ -588,32 +543,32 @@ public class ImageUtils {
 	 * @param alpha
 	 *            透明度：alpha 必须是范围 [0.0, 1.0] 之内（包含边界值）的一个浮点数字
 	 */
-	public final static void pressImage(String pressImg, String srcImageFile,
-			String destImageFile, int x, int y, float alpha) {
+	public final static void pressImage(String pressImg, String srcImageFile, String destImageFile, float alpha) {
 		try {
 			File img = new File(srcImageFile);
 			Image src = ImageIO.read(img);
 			int wideth = src.getWidth(null);
 			int height = src.getHeight(null);
-			BufferedImage image = new BufferedImage(wideth, height,
-					BufferedImage.TYPE_INT_RGB);
+			BufferedImage image = new BufferedImage(wideth, height, BufferedImage.TYPE_INT_RGB);
 			Graphics2D g = image.createGraphics();
 			g.drawImage(src, 0, 0, wideth, height, null);
 			// 水印文件
 			Image src_biao = ImageIO.read(new File(pressImg));
 			int wideth_biao = src_biao.getWidth(null);
 			int height_biao = src_biao.getHeight(null);
-			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,
-					alpha));
-			g.drawImage(src_biao, (wideth - wideth_biao) / 2,
-					(height - height_biao) / 2, wideth_biao, height_biao, null);
+			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
+			// g.drawImage(src_biao, (wideth - wideth_biao) / 2, (height -
+			// height_biao) / 2, wideth_biao, height_biao, null);
+			/*水印按图片大小进行比例适配*/
+			int mark_w = (int) (wideth * 0.25);
+			int mark_h = height_biao * mark_w / wideth_biao;
+			g.drawImage(src_biao, (wideth - mark_w), (height - mark_h), mark_w, mark_h, null);// 放在右下角
 			// 水印文件结束
 			g.dispose();
 
 			// 获取保存的图片扩展名
 			String imgType = getExtensionName(destImageFile);
-			ImageIO.write((BufferedImage) image, imgType, new File(
-					destImageFile));
+			ImageIO.write((BufferedImage) image, imgType, new File(destImageFile));
 		} catch (Exception e) {
 			LOG.error("给图片添加图片水印失败。", e);
 		}
@@ -666,8 +621,7 @@ public class ImageUtils {
 	 *            待合并图片的纵坐标修正值（相对于模板图片）
 	 * @return
 	 */
-	public static BufferedImage mergeImage(String fromImagePath,
-			String toImagePath, int x, int y) {
+	public static BufferedImage mergeImage(String fromImagePath, String toImagePath, int x, int y) {
 		BufferedImage fromImage = null;
 		BufferedImage toImage = null;
 		try {
@@ -681,14 +635,12 @@ public class ImageUtils {
 			g.drawImage(fromImage, x, y, w, h, null);
 			g.dispose();
 		} catch (Exception e) {
-			LOG.error("合并图片失败。fromImagePath=" + fromImagePath + ",toImagePath="
-					+ toImagePath, e);
+			LOG.error("合并图片失败。fromImagePath=" + fromImagePath + ",toImagePath=" + toImagePath, e);
 		}
 
 		return toImage;
 	}
-	
-	
+
 	/**
 	 * 合并图片，以toImagePath图片为模板，将fromImagePath图片合并过去
 	 * 
@@ -702,8 +654,7 @@ public class ImageUtils {
 	 *            待合并图片的纵坐标修正值（相对于模板图片）
 	 * @return
 	 */
-	public static BufferedImage mergeImage(BufferedImage fromImage,
-			BufferedImage toImage, int x, int y) {
+	public static BufferedImage mergeImage(BufferedImage fromImage, BufferedImage toImage, int x, int y) {
 		try {
 			int w = fromImage.getWidth();
 			int h = fromImage.getHeight();
@@ -733,23 +684,22 @@ public class ImageUtils {
 	 *            目标输出图片文件
 	 * @return
 	 */
-	public static void saveMergeImage(String fromImagePath, String toImagePath,
-			int x, int y, String destImageFile) {
+	public static void saveMergeImage(String fromImagePath, String toImagePath, int x, int y, String destImageFile) {
 		try {
 			BufferedImage image = mergeImage(fromImagePath, toImagePath, x, y);
 			// 获取保存的图片扩展名
 			String imgType = getExtensionName(destImageFile);
 			ImageIO.write(image, imgType, new File(destImageFile));// 输出到文件流
 		} catch (Exception e) {
-			LOG.error("合并图片失败。fromImagePath=" + fromImagePath + ",toImagePath="
-					+ toImagePath, e);
+			LOG.error("合并图片失败。fromImagePath=" + fromImagePath + ",toImagePath=" + toImagePath, e);
 		}
 	}
-	
+
 	/**
 	 * 合并图片，以toImagePath图片为模板，将fromImagePath图片合并过去,并将结果输出到目标文件
 	 * 
-	 * @param image 图片
+	 * @param image
+	 *            图片
 	 * @param destImageFile
 	 *            目标输出图片文件
 	 * @return
