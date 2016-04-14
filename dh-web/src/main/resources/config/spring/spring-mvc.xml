@@ -51,16 +51,18 @@
     <!-- 定义默认的Controller异常处理 -->
    <bean class="com.dh.controller.SimpleExceptionResolver"/>
     
-    <!-- 配置拦截器，按指定顺序执行 -->
+   <!-- 配置拦截器，按指定顺序执行 -->
     <!-- 对所有的请求拦截使用/** ,对某个模块下的请求拦截使用：/myPath/* -->
-   <!--  <mvc:interceptors>
-   		 <mvc:interceptor>
+    <mvc:interceptors>
+        <!-- session拦截 -->
+        <mvc:interceptor>
+        <!-- mapping 为要拦截的路径，后续增加要拦截的路径 -->
             <mvc:mapping path="/**" />
-            <ref bean="globalInterceptor" />
+            <ref bean="sessionInterceptor" ></ref>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/**" />
-            <ref bean="sessionInterceptor" />
+        	<mvc:mapping path="/**" ></mvc:mapping>
+        	<ref bean="appInterceptor"></ref>
         </mvc:interceptor>
-    </mvc:interceptors> -->
+    </mvc:interceptors>
 </beans>
