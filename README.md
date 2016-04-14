@@ -29,6 +29,7 @@ DH接口概要
  
  </br>
 *1.2 手机注册
+
   URL:/user/regist.do
   
     PRARMS:
@@ -65,7 +66,9 @@ DH接口概要
 </br>
 
 * 1.3 第三方注册/登录
+* 
   URL:/user/registOther.do
+
   PRARMS:
          open_id:'第三方登录唯一标识'
 
@@ -96,11 +99,17 @@ DH接口概要
   
   `license_time`  '领证日期',
 
+ </br>
 * 1.4 获取用户信息
+* 
  URL：/user/getUserInfo.do
+
  PARAMS:
+ 
        user_id:'用户ID（8位数字）'
+       
  RETURN:{"code":0,"msg":"success","object":""}
+ 
   `user_id`  '用户ID（8位数字）',
   
   `account`  '用户昵称',
@@ -124,9 +133,12 @@ DH接口概要
   `birth_day`  '生日',
   
   `license_time`  '领证日期',
+   </br>
  
 * 1.5 修改用户信息
+* 
  URL：/user/updateUser.do
+
  PARAMS:
   `user_id`  '用户ID（8位数字）',
 
@@ -141,4 +153,5 @@ DH接口概要
   `birth_day`  '生日',
   
   `license_time`  '领证日期',
+  
  RETURN:{"code":0,"msg":"success","object":""}
