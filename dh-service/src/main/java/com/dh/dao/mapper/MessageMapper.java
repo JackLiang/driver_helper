@@ -1,5 +1,8 @@
 package com.dh.dao.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import com.dh.model.Message;
 
 public interface MessageMapper {
@@ -14,4 +17,6 @@ public interface MessageMapper {
     int updateByPrimaryKeySelective(Message record);
 
     int updateByPrimaryKey(Message record);
+    
+    List<Message> selectByAddress(Map<String,Object> map);
 }
