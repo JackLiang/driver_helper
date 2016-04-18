@@ -172,4 +172,18 @@
       ext2 = #{ext2,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectByAddress" parameterType="map" resultMap="BaseResultMap">
+  
+  select 
+   <include refid="Base_Column_List" />
+    from message
+    where
+    type = <![CDATA[(type & #{interest,jdbcType=INTEGER})]]>
+    <if test="address != null and address != ''">
+    and address like CONCAT('%',#{address,jdbcType=VARCHAR},'%')
+    </if>
+    order by create_time desc
+    limit #{limit,jdbcType=INTEGER}
+  </select>
 </mapper>
