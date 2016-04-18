@@ -39,8 +39,8 @@ public class CommonController {
 //	private SystemPropertyService systemPropertyService;
 
 	/**
-	 * @param player_id
-	 *            玩家ID
+	 * @param user_id
+	 *            用户ID
 	 * @param type
 	 *            上传类型1是水印图片
 	 * @param file
@@ -49,7 +49,7 @@ public class CommonController {
 	@CleanUserAgent
 	@RequestMapping("/uploadPicUrl.do")
 	@ResponseBody
-	public Object uploadPicUrl(String player_id, int type, MultipartFile file) {
+	public Object uploadPicUrl(String user_id, int type, MultipartFile file) {
 		InputStream in = null;
 		OutputStream out = null;
                 
@@ -64,31 +64,31 @@ public class CommonController {
 			new File(filename).createNewFile();
 			file.transferTo(new File(filename));
 
-			LOG.info(player_id + "保存本地成功，目录=[" + realPath + "]");
+			LOG.info(user_id + "保存本地成功，目录=[" + realPath + "]");
 			UploadResultInfo info = null;
 			if (type == 1) {
 				String markFilename = realPath + File.separator + "images" + File.separator + "mark" + File.separator + "mark.png";// 水印图片的地址
-				info = OSSImgUtils.uploadPressImage(markFilename, filename, tempname, player_id);// 水印图片上传
+				info = OSSImgUtils.uploadPressImage(markFilename, filename, tempname, user_id);// 水印图片上传
 			} else {
-				info = OSSImgUtils.uploadImage(filename, tempname, player_id);// 其他图片上传
+				info = OSSImgUtils.uploadImage(filename, tempname, user_id);// 其他图片上传
 			}
-			LOG.info(player_id + "上传阿里云成功...文件名=[" + tempname + "]");
+			LOG.info(user_id + "上传阿里云成功...文件名=[" + tempname + "]");
 			/* 删除临时文件 */
 			File tempFile = new File(filename);
 			tempFile.delete();
-			LOG.info(player_id + "删除本地临时文件成功...文件名=[" + tempname + "]");
+			LOG.info(user_id + "删除本地临时文件成功...文件名=[" + tempname + "]");
 
 			String url = info.getFileUrl();
 			 RespVO resp = new RespVO(0,URLEncoder.encode("上传成功。", "UTF-8"),url);   
 			return JSON.toJSONString(resp);
 		} catch (Exception e) {
 			e.printStackTrace();
-			LOG.error(player_id + "上传图片出现异常...", e);
+			LOG.error(user_id + "上传图片出现异常...", e);
 			RespVO resp = null;
 			try {
 				  resp = new RespVO(-1,URLEncoder.encode("上传失败。", "UTF-8"),"");
 			} catch (Exception e1) {
-				LOG.error(player_id + "上传图片出现异常... ", e);
+				LOG.error(user_id + "上传图片出现异常... ", e);
 			}
 			return JSON.toJSONString(resp);
 		} finally {
