@@ -155,3 +155,39 @@ DH接口概要
   `license_time`  '领证日期',
   
  RETURN:{"code":0,"msg":"success","object":""}
+#####2.消息
+* 2.1,上报消息
+* URL：/message//addReport.do
+* PARAMS:user_id用户ID
+*        title消息主题
+*        type消息类型（1警察2拥堵3车祸4封路5施工）
+*        desc消息描述
+*        imgs多张图片地址，逗号隔开
+*        location经纬度，逗号隔开
+*        address事发区域，如广州市-海珠区-赤岗
+* RETURN:{"code":0,"msg":"success","object":""}   
+
+</br>
+
+* 2.2获取消息列表
+* URL:/message//getReport.do
+* PARAMS:user_id用户ID
+*        interest兴趣偏好，用户关注的类型（1警察2拥堵3车祸4封路5施工）,多个偏好逗号隔开
+*        location经纬度，逗号隔开
+*        address事发区域，如广州市-海珠区-赤岗
+* RETURN:{"code":0,"msg":"success","object":""} 
+  `user_id` T '用户ID关联user',
+
+  `title` '消息主题',
+  
+  `type`  '消息类型(二进制：1<<1警察1<<2拥堵1<<3车祸1<<4封路1<<5施工)',
+  
+  `desc`  '描述',
+  
+  `imgs`  '多张现场拍照图片(img1,img2...)',
+  
+  `location` '精确坐标（经度，纬度）',
+  
+  `address` '事发现场区域（广州市-海珠区-赤岗）',
+  
+  `create_time` 创建时间
