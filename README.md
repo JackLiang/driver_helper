@@ -191,3 +191,14 @@ DH接口概要
   `address` '事发现场区域（广州市-海珠区-赤岗）',
   
   `create_time` 创建时间
+  
+  </br>
+* 3.通用接口
+* 3.1 上传图片到阿里云（注意需要模拟表单上传）
+* URL:/common/uploadPicUrl.do
+* PARAMS：user_id 用户ID
+*         type 1水印上传2无水印上传
+*         file 上传的文件流
+
+   RETURN:{"code":0,"msg":"success","object":""} 
+   返回上传到阿里云后的图片url
