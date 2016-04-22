@@ -1,7 +1,7 @@
 package com.dh.common.oss;
 
 /**
- * 友魄科技
+ *  
  */
 
 import java.io.File;
