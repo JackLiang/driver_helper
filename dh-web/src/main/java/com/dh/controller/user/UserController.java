@@ -49,7 +49,7 @@ public class UserController {
 		HttpSession session = request.getSession(true);
 		session.setAttribute(SessionKey.DH_USER, user);
 
-		return JSON.toJSONString(new RespVO(0, "登录成功"));
+		return JSON.toJSONString(new RespVO(0, "登录成功", user.getUserId()));
 	}
 
 	@RequestMapping("/regist.do")

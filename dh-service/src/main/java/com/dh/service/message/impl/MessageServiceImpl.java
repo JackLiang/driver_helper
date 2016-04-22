@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.dh.common.map.MapUtils;
 import com.dh.dao.message.MessageDao;
@@ -51,6 +52,29 @@ public class MessageServiceImpl implements MessageService {
 		}
 
 		return needSendMsgs;
+	}
+
+	/*
+	 * 评价（不作并发考虑）
+	 * 
+	 * @see com.dh.service.message.MessageService#evaluate(int, int)
+	 */
+	@Transactional
+	public void evaluate(int msgId, int type) {
+
+		Message msg = messageDao.get(msgId);
+		if (msg == null) {
+			return;
+		}
+
+		if (type == 1) {
+			msg.setIsUsed(msg.getIsUsed() + 1);
+		} else if (type == 2) {
+			msg.setNoUsed(msg.getNoUsed() + 1);
+		}
+
+		messageDao.update(msg);
+
 	}
 
 }

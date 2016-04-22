@@ -18,6 +18,10 @@ public class Message {
     private String location;
 
     private String address;
+    
+    private Integer isUsed;
+    
+    private Integer noUsed;
 
     private Date createTime;
 
@@ -122,4 +126,21 @@ public class Message {
     public void setExt2(Integer ext2) {
         this.ext2 = ext2;
     }
+
+	public Integer getIsUsed() {
+		return isUsed;
+	}
+
+	public void setIsUsed(Integer isUsed) {
+		this.isUsed = isUsed;
+	}
+
+	public Integer getNoUsed() {
+		return noUsed;
+	}
+
+	public void setNoUsed(Integer noUsed) {
+		this.noUsed = noUsed;
+	}
+    
 }

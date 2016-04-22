@@ -11,5 +11,9 @@ public interface MessageDao {
 	public int insert(Message message);
 	
 	public List<Message> listByAddress(MessageCriteria mc);
+	
+	public Message get(int id);
+	
+	public int update(Message message);
 
 }

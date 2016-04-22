@@ -30,4 +30,14 @@ public class MessageDaoImpl extends BaseDao implements MessageDao {
 		return this.getMapper(MessageMapper.class).selectByAddress(map);
 	}
 
+	@Override
+	public Message get(int id) {
+		return this.getMapper(MessageMapper.class).selectByPrimaryKey(id);
+	}
+
+	@Override
+	public int update(Message message) {
+		return this.getMapper(MessageMapper.class).updateByPrimaryKeySelective(message);
+	}
+
 }

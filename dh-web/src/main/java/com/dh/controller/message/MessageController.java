@@ -50,6 +50,8 @@ public class MessageController {
 		msg.setImgs(imgs);
 		msg.setLocation(location);
 		msg.setAddress(address);
+		msg.setIsUsed(0);
+		msg.setNoUsed(0);
 		msg.setCreateTime(new Date());
 
 		int code = messageService.send(msg) ? 0 : -1;
@@ -73,6 +75,20 @@ public class MessageController {
 
 		return JSON.toJSON(new RespVO(0, "上报成功", msgs));
 
+	}
+	
+	@ResponseBody
+	@RequestMapping("/evaluate.do")
+	public Object evaluate(int msgId, int type){
+		
+		
+		
+		
+		
+		
+		
+		return type;
+		
 	}
 
 }
