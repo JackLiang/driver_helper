@@ -11,7 +11,7 @@ public class Message {
 
     private Integer type;
 
-    private String desc;
+    private String description;
 
     private String imgs;
 
@@ -63,12 +63,12 @@ public class Message {
         this.type = type;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public String getImgs() {

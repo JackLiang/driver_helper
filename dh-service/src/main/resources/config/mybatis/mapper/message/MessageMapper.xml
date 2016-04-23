@@ -6,19 +6,17 @@
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="imgs" property="imgs" jdbcType="VARCHAR" />
     <result column="location" property="location" jdbcType="VARCHAR" />
     <result column="address" property="address" jdbcType="VARCHAR" />
-    <result column="is_used" property="isUsed" jdbcType="INTEGER" />
-    <result column="no_used" property="noUsed" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="ext1" property="ext1" jdbcType="VARCHAR" />
     <result column="ext2" property="ext2" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, title, type, desc, imgs, location, address, is_used, no_used, create_time, update_time, 
+    id, user_id, title, type, description, imgs, location, address, create_time, update_time, 
     ext1, ext2
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -33,11 +31,11 @@
   </delete>
   <insert id="insert" parameterType="com.dh.model.Message" >
     insert into message (id, user_id, title, 
-      type, desc, imgs, location, 
+      type, description, imgs, location, 
       address, create_time, update_time, 
       ext1, ext2)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
-      #{type,jdbcType=INTEGER}, #{desc,jdbcType=VARCHAR}, #{imgs,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{imgs,jdbcType=VARCHAR}, #{location,jdbcType=VARCHAR}, 
       #{address,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{ext1,jdbcType=VARCHAR}, #{ext2,jdbcType=INTEGER})
   </insert>
@@ -56,8 +54,8 @@
       <if test="type != null" >
         type,
       </if>
-      <if test="desc != null" >
-        desc,
+      <if test="description != null" >
+        description,
       </if>
       <if test="imgs != null" >
         imgs,
@@ -67,12 +65,6 @@
       </if>
       <if test="address != null" >
         address,
-      </if>
-      <if test="isUsed != null" >
-        is_used,
-      </if>
-      <if test="noUsed != null" >
-        no_used,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -100,8 +92,8 @@
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=VARCHAR},
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
       </if>
       <if test="imgs != null" >
         #{imgs,jdbcType=VARCHAR},
@@ -111,12 +103,6 @@
       </if>
       <if test="address != null" >
         #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="isUsed != null" >
-        #{isUsed,jdbcType=INTEGER},
-      </if>
-      <if test="noUsed != null" >
-        #{noUsed,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
@@ -144,8 +130,8 @@
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="imgs != null" >
         imgs = #{imgs,jdbcType=VARCHAR},
@@ -155,12 +141,6 @@
       </if>
       <if test="address != null" >
         address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="isUsed != null" >
-        is_used = #{isUsed,jdbcType=VARCHAR},
-      </if>
-      <if test="noUsed != null" >
-        no_used = #{noUsed,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -182,7 +162,7 @@
     set user_id = #{userId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER},
-      desc = #{desc,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
       imgs = #{imgs,jdbcType=VARCHAR},
       location = #{location,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
