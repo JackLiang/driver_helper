@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -64,11 +65,11 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping("/getReport.do")
 	@CleanUserAgent
-	public Object getReport(HttpServletRequest request, String user_id, int interest, String address,String location) {
+	public Object getReport(HttpServletRequest request, String user_id, @RequestParam(value = "interest", required = true) int interest, String address,String location) {
 		LOG.info("getReport:获取上报信息，user_id【{}】,interest【{}】,address【{}】", user_id, interest, address);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(SessionKey.DH_USER);
-		if (!user.getUserId().equals(user_id)) {
+		if (user == null || !user.getUserId().equals(user_id)) {
 			LOG.error("addReport:用户非法，session的user_id【{}】,输入的user_id【{}】", user.getUserId(), user_id);
 			return JSON.toJSON(new RespVO(-1, "用户非法"));
 		}
@@ -79,21 +80,15 @@ public class MessageController {
 		mc.setLocation(location);
 		List<Message> msgs = messageService.getByCriteria(mc);
 
-		return JSON.toJSONString(new RespVO(0, "上报成功", msgs));
+		return JSON.toJSONString(new RespVO(0, "获取成功", msgs));
 
 	}
 	
 	@ResponseBody
 	@RequestMapping("/evaluate.do")
 	public Object evaluate(int msgId, int type){
-		
-		
-		
-		
-		
-		
-		
-		return type;
+		messageService.evaluate(msgId, type);
+		return JSON.toJSONString(new RespVO(0, "评价成功"));
 		
 	}
 

@@ -40,7 +40,7 @@ public class MessageServiceImpl implements MessageService {
 		List<Message> needSendMsgs = new ArrayList<Message>();
 		if (msgs != null && !msgs.isEmpty()) {
 			for (Message m : msgs) {
-				String[] ltd = StringUtils.split(m.getLocation(), ",");
+				String[] ltd = StringUtils.split(m.getLocation(), "-");
 				// 用户当前请求位置范围2公里内的数据才推送
 				if (MapUtils.getShortestDistance(Double.parseDouble(ltp[0]), Double.parseDouble(ltp[1]),
 						Double.parseDouble(ltd[0]), Double.parseDouble(ltd[1])) < EFFECTIVE_RANGE) {
