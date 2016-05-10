@@ -26,12 +26,11 @@
 	                <list>    
 	                    <value>text/plain;charset=UTF-8</value>    
 	                    <value>text/html;charset=UTF-8</value>    
-	                    <value>application/json;charset=UTF-8</value>
 	                </list>    
 	            </property>    
 	        </bean>  
 	    </mvc:message-converters>  
-	</mvc:annotation-driven>  
+	</mvc:annotation-driven>    
 	
 	<!-- MVC上下文环境，只加载Controller -->
 	<context:component-scan base-package="com.dh"   use-default-filters="false">
