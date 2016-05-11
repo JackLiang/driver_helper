@@ -172,7 +172,7 @@ DH接口概要
 * 2.2获取消息列表
 * URL:/message//getReport.do
 * PARAMS:user_id用户ID
-*        interest兴趣偏好，用户关注的类型（1警察2拥堵3车祸4封路5施工）,多个偏好逗号隔开
+*        interest兴趣偏好二进制表示，用户关注的类型（1警察2拥堵3车祸4封路5施工）,多个偏好采用位并（例如关注警察和车祸：1<<1 | 1<<3）
 *        location经纬度，逗号隔开（经度,纬度）
 *        address事发区域，如广州市-海珠区-赤岗
 * RETURN:{"code":0,"msg":"success","object":""} 
