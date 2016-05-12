@@ -193,11 +193,11 @@ DH接口概要
   `create_time` 创建时间
   
   </br>
-  * 2.3评价
-  * URL:/message/evaluate.do
-  * PARAMS:msgId 消息ID，获取消息列表的时候有返回
-  *        type  评价类型1有用2无用
-  * RETURN:{"code":0,"msg":"success","object":""} 
+* 2.3评价
+* URL:/message/evaluate.do
+* PARAMS:msgId 消息ID，获取消息列表的时候有返回
+*        type  评价类型1有用2无用
+* RETURN:{"code":0,"msg":"success","object":""} 
     </br>
     
 * 3.通用接口
