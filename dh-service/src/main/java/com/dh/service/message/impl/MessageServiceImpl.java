@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +27,8 @@ public class MessageServiceImpl implements MessageService {
 	 * 推送范围限制2公里
 	 */
 	private static final double EFFECTIVE_RANGE = 2000d;
+	
+	private final static Logger LOG = LoggerFactory.getLogger(MessageServiceImpl.class);
 
 	@Override
 	public boolean send(Message message) {
@@ -34,7 +38,7 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> getByCriteria(MessageCriteria mc) {
 
-		String[] ltp = StringUtils.split(mc.getLocation(), ",");
+		String[] ltp = StringUtils.split(mc.getLocation(), "-");
 
 		List<Message> msgs = messageDao.listByAddress(mc);
 		List<Message> needSendMsgs = new ArrayList<Message>();
@@ -42,10 +46,12 @@ public class MessageServiceImpl implements MessageService {
 			for (Message m : msgs) {
 				String[] ltd = StringUtils.split(m.getLocation(), "-");
 				// 用户当前请求位置范围2公里内的数据才推送
+				LOG.info("用户获取信息坐标【{},{}】,已上报信息坐标【{},{}】两个坐标间的最短距离【{}】",ltp[0],ltp[1],ltd[0],ltd[1], MapUtils.getShortestDistance(Double.parseDouble(ltp[0]), Double.parseDouble(ltp[1]),
+						Double.parseDouble(ltd[0]), Double.parseDouble(ltd[1])));
 				if (MapUtils.getShortestDistance(Double.parseDouble(ltp[0]), Double.parseDouble(ltp[1]),
 						Double.parseDouble(ltd[0]), Double.parseDouble(ltd[1])) < EFFECTIVE_RANGE) {
 					needSendMsgs.add(m);
-
+                
 				}
 
 			}

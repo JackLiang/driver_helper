@@ -36,13 +36,13 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping("/addReport.do")
 	@CleanUserAgent
-	public Object addReport(HttpServletRequest request, String user_id, String title, Integer type,
-			String desc, String imgs, String location, String address) {
+	public Object addReport(HttpServletRequest request, String user_id, String title, Integer type, String desc,
+			String imgs, String location, String address) {
 		LOG.info("addReport:用户上报，user_id【{}】,title【{}】,type【{}】,imgs【{}】,location【{}】,address【{}】", user_id, title,
 				type, imgs, location, address);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(SessionKey.DH_USER);
-		if (!user.getUserId().equals(user_id)) {
+		if (user == null || !user.getUserId().equals(user_id)) {
 			LOG.error("addReport:用户非法，session的user_id【{}】,输入的user_id【{}】", user.getUserId(), user_id);
 			return JSON.toJSONString(new RespVO(-1, "用户非法"));
 		}
@@ -65,7 +65,8 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping("/getReport.do")
 	@CleanUserAgent
-	public Object getReport(HttpServletRequest request, String user_id, @RequestParam(value = "interest", required = true) int interest, String address,String location) {
+	public Object getReport(HttpServletRequest request, String user_id,
+			@RequestParam(value = "interest", required = true) int interest, String address, String location) {
 		LOG.info("getReport:获取上报信息，user_id【{}】,interest【{}】,address【{}】", user_id, interest, address);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(SessionKey.DH_USER);
@@ -83,13 +84,21 @@ public class MessageController {
 		return JSON.toJSONString(new RespVO(0, "获取成功", msgs));
 
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/evaluate.do")
-	public Object evaluate(int msgId, int type){
-		messageService.evaluate(msgId, type);
+	public Object evaluate(HttpServletRequest request, String user_id, int msg_id, int type) {
+
+		LOG.info("evaluate:评价,user_id【{}】,msg_id【{}】,type【{}】", user_id, msg_id, type);
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute(SessionKey.DH_USER);
+		if (user == null || !user.getUserId().equals(user_id)) {
+			LOG.error("addReport:用户非法，session的user_id【{}】,输入的user_id【{}】", user.getUserId(), user_id);
+			return JSON.toJSON(new RespVO(-1, "用户非法"));
+		}
+		messageService.evaluate(msg_id, type);
 		return JSON.toJSONString(new RespVO(0, "评价成功"));
-		
+
 	}
 
 }
