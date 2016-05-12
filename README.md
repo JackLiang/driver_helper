@@ -195,7 +195,8 @@ DH接口概要
   </br>
 * 2.3评价
 * URL:/message/evaluate.do
-* PARAMS:msgId 消息ID，获取消息列表的时候有返回
+* PARAMS:user_id用户ID
+* msg_id 消息ID，获取消息列表的时候有返回
 *        type  评价类型1有用2无用
 * RETURN:{"code":0,"msg":"success","object":""} 
     </br>
