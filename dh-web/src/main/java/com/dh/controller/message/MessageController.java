@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -46,6 +47,21 @@ public class MessageController {
 			LOG.error("addReport:用户非法，session的user_id【{}】,输入的user_id【{}】", user.getUserId(), user_id);
 			return JSON.toJSONString(new RespVO(-1, "用户非法"));
 		}
+		if(StringUtils.isBlank(location)){
+			return JSON.toJSONString(new RespVO(-2, "坐标不允许空"));
+		}
+		if(StringUtils.isBlank(imgs)){
+			return JSON.toJSONString(new RespVO(-3, "最少上传一张图片"));
+		}
+		if(StringUtils.isBlank(title)){
+			return JSON.toJSONString(new RespVO(-4, "消息主题不能为空"));
+		}
+		if(type <= 0){
+			return JSON.toJSONString(new RespVO(-5, "消息类型错误"));
+		}
+		if(StringUtils.isBlank(address)){
+			return JSON.toJSONString(new RespVO(-6, "上传区域不正确"));
+		}
 		Message msg = new Message();
 		msg.setUserId(user.getId());
 		msg.setTitle(title);
@@ -72,7 +88,17 @@ public class MessageController {
 		User user = (User) session.getAttribute(SessionKey.DH_USER);
 		if (user == null || !user.getUserId().equals(user_id)) {
 			LOG.error("addReport:用户非法，session的user_id【{}】,输入的user_id【{}】", user.getUserId(), user_id);
-			return JSON.toJSON(new RespVO(-1, "用户非法"));
+			return JSON.toJSONString(new RespVO(-1, "用户非法"));
+		}
+		if(StringUtils.isBlank(location)){
+			return JSON.toJSONString(new RespVO(-2, "坐标不允许空"));
+		}
+		
+		if(interest <= 0){
+			return JSON.toJSONString(new RespVO(-3, "至少选择一个偏好"));
+		}
+		if(StringUtils.isBlank(address)){
+			return JSON.toJSONString(new RespVO(-4, "查询区域不正确"));
 		}
 		MessageCriteria mc = new MessageCriteria();
 		mc.setAddress(address);
@@ -88,8 +114,12 @@ public class MessageController {
 	@ResponseBody
 	@RequestMapping("/evaluate.do")
 	public Object evaluate(HttpServletRequest request, String user_id, int msg_id, int type) {
-
+		
 		LOG.info("evaluate:评价,user_id【{}】,msg_id【{}】,type【{}】", user_id, msg_id, type);
+		if(type < 1 || type >2){
+			return JSON.toJSONString(new RespVO(-1, "评价类型只能是1或者2"));
+		}
+		
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(SessionKey.DH_USER);
 		if (user == null || !user.getUserId().equals(user_id)) {
