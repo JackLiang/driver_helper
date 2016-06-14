@@ -43,6 +43,7 @@ public class MessageController {
 				type, imgs, location, address);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(SessionKey.DH_USER);
+		
 		if (user == null || !user.getUserId().equals(user_id)) {
 			LOG.error("addReport:用户非法，session的user_id【{}】,输入的user_id【{}】", user.getUserId(), user_id);
 			return JSON.toJSONString(new RespVO(-1, "用户非法"));
